@@ -30,3 +30,20 @@ print("Students and their marks:",students_marks.items())
 # 9 Use .get() to access the value of " Rahul" safely (if not foumd ,return "Not Found")
 students_marks['Rahul'] = 88
 print("Marks of Rahul:",students_marks.get('Rahul', 'Not Found'))
+
+# 10 Use .update to add multiple key-value pairs in one step
+students_marks.update({'Eve':95, 'Frank':80})
+print("Updated students and their marks:",students_marks)
+
+# 11 Use .pop(key) to remove " Germany" from the dictionaries
+countries_capitals.pop('Germany', None)
+print("Countries and their capitals after removing Germany:",countries_capitals)
+
+# 12 Try popping a non- exiting key using .pop() with a default value
+removed_value = countries_capitals.pop('Spain', 'Not Found')
+print("Trying to remove Spain:",removed_value)
+
+
+# 13 Use .clear () to remove all elements from the dictionary
+students_marks.clear()
+print("Students marks after clearing all elements:",students_marks)
