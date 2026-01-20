@@ -1,2 +1,0 @@
-# bestie
-print("Hello,Bestie!")
