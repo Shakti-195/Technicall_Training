@@ -17,34 +17,78 @@ INSERT INTO Customers (customer_id, customer_name, gender, city, signup_date) VA
 ("C204", "Pooja",  "Female", "Delhi",      "2024-03-20"),
 ("C205", "Karan",  "Male",   "Mumbai",     "2024-04-01");
 
-create Table orders(
-product_id  varchar (50),
-product_name varchar(50),
-price int ,
-order_id int primary key,
-customer_id varchar(50) 
+
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id VARCHAR(50),
+    product_name VARCHAR(50),
+    category VARCHAR(50),
+    amount INT,
+    order_date DATE
 );
-show databases;
-use company;
 
-insert into orders values
-("P1","Phone",500,1,"C101"),
-("P2","Laptop",700,2,"C102"),
-("P3","Tablet",300,3,"C101")
-;
-
+INSERT INTO orders VALUES
+(101, 'C201', 'Laptop', 'Electronics', 55000, '2024-04-10'),
+(102, 'C202', 'Mobile', 'Electronics', 25000, '2024-04-12'),
+(103, 'C201', 'Mouse', 'Accessories', 800, '2024-04-15'),
+(104, 'C203', 'Chair', 'Furniture', 4500, '2024-04-18'),
+(105, 'C206', 'Table', 'Furniture', 7000, '2024-04-20'),
+(106, 'C205', 'Headphones', 'Accessories', 3000, '2024-04-22');
 
 select * from orders;
 
+SELECT 
+    c.customer_id,
+    c.customer_name,
+    o.product_name,
+    o.category,
+    o.amount,
+    o.order_date
+FROM customers c
+JOIN orders o
+ON c.customer_id = o.customer_id;
 
 SELECT 
-    customers.customer_name,
-    orders.product_name,
-    orders.price
-FROM customers
-JOIN orders
-ON customers.customer_id = orders.customer_id;
+    c.customer_name,
+    o.product_name,
+    o.amount
+FROM customers c
+LEFT JOIN orders o
+ON c.customer_id = o.customer_id;
+
+SELECT 
+    c.customer_name,
+    o.product_name,
+    o.amount
+FROM customers c
+RIGHT JOIN orders o
+ON c.customer_id = o.customer_id;
+
+SELECT 
+    c.customer_name,
+    o.product_name,
+    o.amount
+FROM customers c
+LEFT JOIN orders o
+ON c.customer_id = o.customer_id;
+
+SELECT 
+    c.customer_name,
+    o.product_name,
+    o.amount
+FROM customers c
+JOIN orders o
+ON c.customer_id = o.customer_id
+WHERE o.category = 'Electronics';
+
+SELECT 
+    c.customer_name,
+    SUM(o.amount) AS total_spent
+FROM customers c
+JOIN orders o
+ON c.customer_id = o.customer_id
+GROUP BY c.customer_name;
 
 
-SELECT DISTINCT customer_id FROM customers;
-SELECT DISTINCT customer_id FROM orders;
+
